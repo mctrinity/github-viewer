@@ -7,7 +7,7 @@ import { Input } from "./components/ui/input";
 import { Button } from "./components/ui/button";
 import { ThemeToggle } from "./components/ThemeToggle";
 import { Spinner } from "./components/ui/spinner";
-
+import { motion } from "framer-motion";
 
 export default function App() {
   const [username, setUsername] = useState("");
@@ -23,13 +23,20 @@ export default function App() {
         axios.get(`https://api.github.com/users/${username}/repos?per_page=100`),
       ]);
 
-      const sortedRepos = reposRes.data
-        .sort((a: any, b: any) => b.stargazers_count - a.stargazers_count)
+      const repos = reposRes.data;
+
+      const topRepos = [...repos]
+        .sort((a, b) => b.stargazers_count - a.stargazers_count)
+        .slice(0, 5);
+
+      const recentRepos = [...repos]
+        .sort((a, b) => new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime())
         .slice(0, 5);
 
       setProfile({
         ...userRes.data,
-        repos: sortedRepos,
+        topRepos,
+        recentRepos,
       });
     } catch (err) {
       setProfile(null);
@@ -57,45 +64,49 @@ export default function App() {
           <Button onClick={fetchProfile} disabled={loading}>
             {loading ? <Spinner /> : "Search"}
           </Button>
-
         </div>
 
         {profile && (
           <>
-            <Card>
-              <CardContent className="p-6 flex flex-col items-center text-center">
-                <img
-                  src={profile.avatar_url}
-                  alt="avatar"
-                  className="rounded-full w-28 h-28 mb-4 border"
-                />
-                <h2 className="text-2xl font-semibold">
-                  {profile.name || profile.login}
-                </h2>
-                <p className="text-sm text-muted-foreground">{profile.bio}</p>
-                <div className="mt-4 text-sm text-muted-foreground">
-                  📦 {profile.public_repos} Repos | 👥 {profile.followers} Followers
-                </div>
-              </CardContent>
-            </Card>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+            >
+              <Card>
+                <CardContent className="p-6 flex flex-col items-center text-center">
+                  <img
+                    src={profile.avatar_url}
+                    alt="avatar"
+                    className="rounded-full w-28 h-28 mb-4 border"
+                  />
+                  <h2 className="text-2xl font-semibold">
+                    {profile.name || profile.login}
+                  </h2>
+                  <p className="text-sm text-muted-foreground">{profile.bio}</p>
+                  <div className="mt-4 text-sm text-muted-foreground">
+                    📦 {profile.public_repos} Repos | 👥 {profile.followers} Followers
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
 
-            {profile.repos?.length > 0 && (
-              <div>
+            {profile.topRepos?.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3, duration: 0.4 }}
+              >
                 <h3 className="text-lg font-semibold mb-2 text-left">
                   Top Repositories
                 </h3>
                 <ul className="grid gap-2">
-                  {profile.repos.map((repo: any) => (
+                  {profile.topRepos.map((repo: any) => (
                     <li
                       key={repo.id}
-                      className="border rounded-lg p-4 bg-muted text-left hover:bg-muted/70 transition"
+                      className="border rounded-lg p-4 bg-muted text-left transition hover:bg-accent hover:ring-1 hover:ring-ring"
                     >
-                      <a
-                        href={repo.html_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-primary font-medium hover:underline"
-                      >
+                      <a href={repo.html_url} target="_blank" rel="noopener noreferrer" className="text-primary font-semibold flex items-center gap-2 hover:underline">🔗
                         {repo.name}
                       </a>
                       {repo.description && (
@@ -103,11 +114,40 @@ export default function App() {
                           {repo.description}
                         </p>
                       )}
-                      <div className="text-xs mt-1">⭐ {repo.stargazers_count}</div>
+                      <div className="text-xs mt-1">
+                        ⭐ {repo.stargazers_count}
+                      </div>
                     </li>
                   ))}
                 </ul>
-              </div>
+              </motion.div>
+            )}
+
+            {profile.recentRepos?.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5, duration: 0.4 }}
+              >
+                <h3 className="text-lg font-semibold mt-8 mb-2 text-left">
+                  Recently Updated
+                </h3>
+                <ul className="grid gap-2">
+                  {profile.recentRepos.map((repo: any) => (
+                    <li
+                      key={repo.id}
+                      className="border rounded-lg p-4 bg-muted text-left transition hover:bg-accent hover:ring-1 hover:ring-ring"
+                    >
+                      <a href={repo.html_url} target="_blank" rel="noopener noreferrer" className="text-primary font-semibold flex items-center gap-2 hover:underline">🔗
+                        {repo.name}
+                      </a>
+                      <div className="text-xs text-muted-foreground mt-1">
+                        🕒 Last updated: {new Date(repo.pushed_at).toLocaleDateString()}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
             )}
           </>
         )}
@@ -115,3 +155,4 @@ export default function App() {
     </div>
   );
 }
+
