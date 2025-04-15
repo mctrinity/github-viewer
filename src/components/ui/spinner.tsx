@@ -1,6 +1,5 @@
+import { Loader } from "lucide-react";
+
 export function Spinner() {
-    return (
-      <div className="w-5 h-5 border-2 border-t-transparent border-ring rounded-full animate-spin mx-auto" />
-    );
-  }
-  
+  return <Loader className="w-4 h-4 animate-spin text-muted-foreground" />;
+}
