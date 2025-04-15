@@ -54,17 +54,24 @@ export default function App() {
           🔍 GitHub Profile Viewer
         </h1>
 
-        <div className="flex gap-2 items-center">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            fetchProfile();
+          }}
+          className="flex gap-2 items-center"
+        >
           <Input
             placeholder="Enter GitHub username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             className="flex-1"
           />
-          <Button onClick={fetchProfile} disabled={loading}>
+          <Button type="submit" disabled={loading}>
             {loading ? <Spinner /> : "Search"}
           </Button>
-        </div>
+        </form>
+
 
         {profile && (
           <>
