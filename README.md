@@ -5,9 +5,12 @@ A sleek and minimal GitHub profile viewer built with:
 - ⚡️ [Bun](https://bun.sh) — the super-fast JavaScript runtime
 - 🧠 React + TypeScript — modern frontend stack
 - 💅 [TailwindCSS](https://tailwindcss.com) + [Shadcn UI](https://ui.shadcn.com) — for styling
-- 🎨 Dark mode toggle
-- 🔁 Animated profile card with Framer Motion
-- 📦 Fetches GitHub profile + top 5 repos
+- 🌗 Dark mode toggle with Shadcn
+- 🔁 Animated UI using [Framer Motion](https://www.framer.com/motion/)
+- 📦 GitHub profile viewer with top and recent repos
+- 🔍 Repo filtering and search by name and language
+- 👁️ View All / Show Less toggles for expanded repo views
+- ⏳ Modern icon spinner (Lucide `Loader`)
 
 ---
 
@@ -37,9 +40,12 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 - 🔍 Search GitHub usernames
 - 🧑 View avatar, name, bio, repo count, followers
 - 📚 List top 5 public repos by stars
+- 🕒 View 5 recently updated repositories
+- 📖 View all repos with optional filtering by language and search
+- 👁️ Toggle "View All" and "Show Less" for top and recent repos
 - 🌗 Toggle between light/dark mode
-- 💫 Smooth fade-in animation for profile card
-- 🎨 Fully styled with Tailwind + Shadcn UI
+- 🔄 Animated fade-in and scroll with Framer Motion
+- ⏳ Spinner using Lucide `Loader` icon
 
 ---
 
@@ -67,6 +73,7 @@ src/
 - [Tailwind CSS](https://tailwindcss.com)
 - [Shadcn UI](https://ui.shadcn.com)
 - [Framer Motion](https://www.framer.com/motion/)
+- [Lucide React](https://lucide.dev)
 - [GitHub REST API](https://docs.github.com/en/rest)
 
 ---
