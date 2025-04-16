@@ -1,9 +1,12 @@
 {
-    "outputDirectory": "build",
+    "version": 2,
     "builds": [
       {
-        "src": "build/index.html",
-        "use": "@vercel/static"
+        "src": "build.ts",
+        "use": "@vercel/static-build",
+        "config": {
+          "distDir": "build"
+        }
       }
     ],
     "routes": [
