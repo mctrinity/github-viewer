@@ -1,6 +1,10 @@
 # dependencies (bun install)
 node_modules
 
+# in .gitignore
+build/
+
+
 # output
 out
 dist
