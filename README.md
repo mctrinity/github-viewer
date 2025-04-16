@@ -11,6 +11,7 @@ A sleek and minimal GitHub profile viewer built with:
 - 🔍 Repo filtering and search by name and language
 - 👁️ View All / Show Less toggles for expanded repo views
 - ⏳ Modern icon spinner (Lucide `Loader`)
+- 🧱 Header and Footer components
 
 ---
 
@@ -46,6 +47,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 - 🌗 Toggle between light/dark mode
 - 🔄 Animated fade-in and scroll with Framer Motion
 - ⏳ Spinner using Lucide `Loader` icon
+- 🧱 Persistent header and footer layout
 
 ---
 
@@ -53,6 +55,8 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 ```
 src/
 ├── components/
+│   ├── Header.tsx
+│   ├── Footer.tsx
 │   └── ui/
 │       ├── button.tsx
 │       ├── card.tsx
@@ -83,5 +87,5 @@ MIT — free for personal & commercial use
 
 ---
 
-> Made with 💻 + 🧠 + 🖤
+> Built with 💻 + 🧠 + ☕ by Scidyllics
 
