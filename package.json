@@ -6,12 +6,12 @@
   "main": "src/index.tsx",
   "module": "src/index.tsx",
   "scripts": {
-  "dev": "bun --hot src/index.tsx",
-  "start": "NODE_ENV=production bun src/index.tsx",
-  "build": "bun run build.ts",
-  "clean:build": "rm -rf dist && bun run build.ts",
-  "preview": "bunx serve dist"
-},
+    "dev": "bun --hot src/index.tsx",
+    "start": "NODE_ENV=production bun src/index.tsx",
+    "build": "bun run build.ts",
+    "clean:build": "rm -rf dist && bun run build.ts",
+    "preview": "bunx serve dist"
+  },
   "dependencies": {
     "@hookform/resolvers": "^4.1.0",
     "@radix-ui/react-label": "^2.1.2",
@@ -35,5 +35,8 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/bun": "latest"
+  },
+  "engines": {
+    "bun": "1.2.9"
   }
 }
