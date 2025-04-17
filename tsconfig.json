@@ -3,9 +3,12 @@
     "jsx": "react-jsx",
     "allowJs": true,
 
-    // Bundler mode
+    // Bun-friendly bundler mode
     "moduleResolution": "bundler",
-    "module": "preserve",
+    "module": "esnext",              // ⬅️ Required for top-level await
+    "target": "es2020",              // ⬅️ Required for async iterators
+    "downlevelIteration": true,      // ⬅️ Allows for-of on custom iterables
+
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
     "noEmit": true,

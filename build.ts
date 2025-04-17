@@ -134,6 +134,21 @@ if (existsSync(outdir)) {
 
 const start = performance.now();
 
+// Copy logo.svg if it exists in src/
+const logoPath = path.resolve("src", "logo.svg");
+if (existsSync(logoPath)) {
+  const dest = path.resolve(outdir, "logo.svg");
+  await Bun.write(dest, await Bun.file(logoPath).arrayBuffer());
+  console.log("🖼️  Copied logo.svg to dist/");
+}
+
+const faviconPath = path.resolve("favicon.ico");
+if (existsSync(faviconPath)) {
+  const dest = path.resolve(outdir, "favicon.ico");
+  await Bun.write(dest, await Bun.file(faviconPath).arrayBuffer());
+  console.log("🧿 Copied favicon.ico to dist/");
+}
+
 // Scan for all HTML files in the project
 const entrypoints = [...new Bun.Glob("**.html").scanSync("src")]
   .map(a => path.resolve("src", a))

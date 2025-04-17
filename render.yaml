@@ -1,0 +1,6 @@
+services:
+  - type: static
+    name: github-viewer
+    env: static
+    buildCommand: bun run clean:build
+    staticPublishPath: dist
