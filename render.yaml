@@ -1,6 +1,11 @@
 services:
-  - type: static
+  - type: web
     name: github-viewer
     env: static
     buildCommand: bun run clean:build
     staticPublishPath: dist
+    buildFilter:
+      paths: ["src/**", "index.html", "build.ts"]
+    envVars:
+      - key: BUN_VERSION
+        value: "1.2.9"
