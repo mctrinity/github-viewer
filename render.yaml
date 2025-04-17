@@ -1,12 +1,10 @@
 services:
   - type: web
     name: github-viewer
-    env: static
-    installCommand: ""
-    buildCommand: bun install && bun run clean:build
-    staticPublishPath: dist
-    buildFilter:
-      paths: ["src/**", "index.html", "build.ts"]
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    rootDir: .
     envVars:
-      - key: BUN_VERSION
-        value: "1.2.9"
+      - key: NODE_ENV
+        value: production
