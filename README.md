@@ -12,6 +12,7 @@ A sleek and minimal GitHub profile viewer built with:
 - 👁️ View All / Show Less toggles for expanded repo views
 - ⏳ Modern icon spinner (Lucide `Loader`)
 - 🧱 Header and Footer components
+- 🐳 Deployable with Docker and Render
 
 ---
 
@@ -34,6 +35,42 @@ bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+---
+
+## 📦 Docker Support
+
+This app can be containerized and deployed anywhere using Docker.
+
+### 🐳 Docker Build & Run
+```bash
+docker build -t github-profile-viewer .
+docker run -p 3000:3000 github-profile-viewer
+```
+Then visit [http://localhost:3000](http://localhost:3000)
+
+---
+
+## 🚀 Deploying to Render
+
+This project is set up to deploy as a **static web service** on [Render](https://render.com/):
+
+- Make sure `.bun-version` is set to `1.2.9`
+- Your `render.yaml` should include:
+
+```yaml
+services:
+  - type: web
+    name: github-viewer
+    env: static
+    buildCommand: bun install && bun run clean:build
+    staticPublishPath: dist
+    buildFilter:
+      paths: ["src/**", "index.html", "build.ts"]
+    envVars:
+      - key: BUN_VERSION
+        value: "1.2.9"
+```
 
 ---
 
@@ -88,4 +125,3 @@ MIT — free for personal & commercial use
 ---
 
 > Built with 💻 + 🧠 + ☕ by Scidyllics
-
